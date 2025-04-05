@@ -1,0 +1,22 @@
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 16px 2px 16px;
+  background-color: $color-green;
+  border-radius: 12px;
+  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
+
+  &.birth {
+    background-color: $color-teal;
+  }
+  &.male {
+    background-color: $color-green;
+  }
+  &.female {
+    background-color: $color-purple;
+  }
+  &.hermaphrodite {
+    background-color: $color-yellow;
+  }
+}

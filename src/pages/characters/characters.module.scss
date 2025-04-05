@@ -1,0 +1,39 @@
+.page {
+  padding: 30px 0;
+
+  .languageSwitcher {
+    display: flex;
+    justify-content: end;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 35px;
+    font-weight: 700;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);
+    span {
+      font-weight: 800;
+    }
+  }
+}
+
+.filters {
+  margin-bottom: 40px;
+}
+
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 45px 32px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.character {
+  cursor: pointer;
+}

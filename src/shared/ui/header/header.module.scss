@@ -1,0 +1,52 @@
+.header {
+  padding: 10px 0;
+  background-color: $color-primary;
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  nav {
+    display: flex;
+    gap: 74px;
+    a {
+      position: relative;
+      font-size: 25px;
+      color: $color-muted;
+      padding: 10px 0;
+
+      &.active::before {
+        content: "";
+        position: absolute;
+        left: 12%;
+        right: 12%;
+        height: 4px;
+        bottom: 0px;
+        background-color: $color-muted;
+      }
+    }
+  }
+}
+
+@include media(900px) {
+  .container {
+    img {
+      width: 100px;
+    }
+
+    nav {
+      gap: 30px;
+
+      a {
+        font-size: 16px;
+
+        &.active::before {
+          height: 2px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.button {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  border: none;
+  gap: 10px;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  height: 66px;
+  width: 231px;
+  color: black;
+  background-color: $color-third;
+  box-shadow: inset 0px -8px 0px rgba(0, 0, 0, 0.18);
+  scale: 1;
+
+  &:active {
+    scale: 0.9;
+  }
+}

@@ -1,0 +1,56 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  padding: 0 15px;
+  z-index: 10;
+
+  .modalWrapper {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    .modal {
+      background-color: white;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      height: 36px;
+      bottom: calc(100% + 17px);
+      cursor: pointer;
+
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        width: 36px;
+        height: 9px;
+        border-radius: 3px;
+        background-color: black;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+
+      &::before {
+        transform: translateY(9px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+@include media(800px) {
+  .modalOverlay {
+    .modalWrapper {
+      width: auto;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.notFound {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 95px;
+  height: 100vh;
+  background-color: $color-secondary;
+
+  .imageWrapper {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  button {
+    font-size: 23px;
+    background: $color-green;
+  }
+}

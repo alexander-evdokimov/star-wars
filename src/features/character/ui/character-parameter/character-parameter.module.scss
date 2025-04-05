@@ -1,0 +1,22 @@
+.parameter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  .circle {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    border-radius: 50%;
+    border: 3px solid black;
+  }
+
+  .label {
+    color: $color-gray;
+  }
+}

@@ -1,0 +1,19 @@
+.filters {
+  display: flex;
+  align-items: center;
+
+  .filterWrapper {
+    display: flex;
+    align-items: center;
+    height: 23px;
+    gap: 20px;
+
+    span {
+      font-size: 16px;
+    }
+
+    .filter {
+      width: 135px;
+    }
+  }
+}
