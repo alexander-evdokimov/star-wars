@@ -26,8 +26,7 @@ export const Characters: React.FC<Props> = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoaderActive, setIsLoaderActive] = useState(true);
   const [page, setPage] = useState(1);
-  const [getCharacters, { data, isLoading: isCharactersLoading, isSuccess }] =
-    useLazyGetCharactersQuery();
+  const [getCharacters, { data, isSuccess, isFetching }] = useLazyGetCharactersQuery();
 
   const { filtredCharacters, handleChangeFilterColorEye } = useCharacterFilters(characters);
 
@@ -45,7 +44,7 @@ export const Characters: React.FC<Props> = () => {
   };
 
   useEffect(() => {
-    if (inView && !isCharactersLoading) {
+    if (inView && !isFetching) {
       getCharacters(page);
       setPage((prev) => prev + 1);
     }
