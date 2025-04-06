@@ -1,5 +1,5 @@
 import { Container, LanguageSwitcher, Loader } from "@/shared/ui";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./characters.module.scss";
 import {
   CharacterCard,
@@ -18,17 +18,18 @@ interface Props {
 
 export const Characters: React.FC<Props> = () => {
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.2,
   });
 
   const { t } = useTranslation();
 
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [isLoaderActive, setIsLoaderActive] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [getCharacters, { data, isSuccess, isFetching }] = useLazyGetCharactersQuery();
+  const [getCharacters, { isFetching }] = useLazyGetCharactersQuery();
 
-  const { filtredCharacters, handleChangeFilterColorEye } = useCharacterFilters(characters);
+  const { filtredCharacters, handleChangeFilterColorEye, filterColorEye } =
+    useCharacterFilters(characters);
 
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,22 +44,23 @@ export const Characters: React.FC<Props> = () => {
     setIsModalOpen(true);
   };
 
+  const getMoreCharacters = useCallback(async () => {
+    if (isFetching || !hasMore) {
+      return;
+    }
+
+    const response = await getCharacters(page);
+    const isHasMore = !!response.data?.next;
+    setHasMore(isHasMore);
+    setPage((prev) => prev + 1);
+    setCharacters((prev) => [...prev, ...(response.data?.results || [])]);
+  }, [page, hasMore, isFetching]);
+
   useEffect(() => {
-    if (inView && !isFetching) {
-      getCharacters(page);
-      setPage((prev) => prev + 1);
+    if (inView && !isFetching && filterColorEye === "all") {
+      getMoreCharacters();
     }
   }, [inView]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setCharacters((prev) => [...prev, ...data.results]);
-    }
-
-    if (isSuccess && !data.next) {
-      setIsLoaderActive(false);
-    }
-  }, [data]);
 
   return (
     <main className={styles.page}>
@@ -88,12 +90,13 @@ export const Characters: React.FC<Props> = () => {
             </li>
           ))}
         </ul>
-        {isLoaderActive && (
-          <div className={styles.loader} ref={ref}>
+        {isFetching && (
+          <div className={styles.loader}>
             <Loader />
           </div>
         )}
       </Container>
+      <div ref={ref} style={{ height: "20px" }}></div>
       <CharacterDetailsModal
         isOpen={isModalOpen}
         onClose={closeCharacterModal}
